@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="1 -12 32 32" shape-rendering="crispEdges">
+<title>Nerkins</title>
+<rect x="1" y="-12" width="32" height="32" fill="#14214A"/>
+<path fill="#9EE3FB" d="M-7 8h6v1h-6z M-1 7h6v1h-6z M5 6h6v1h-6z M11 5h6v1h-6z M17 4h6v1h-6z M23 3h6v1h-6z M29 2h6v1h-6z M35 1h6v1h-6z"/>
+<path fill="#62CDF7" d="M-7 9h6v1h-6z M-1 8h6v1h-6z M5 7h6v1h-6z M11 6h6v1h-6z M17 5h6v1h-6z M23 4h6v1h-6z M29 3h6v1h-6z M35 2h6v1h-6z"/>
+<path fill="#FFB35C" d="M14 -6h6v1h-6z M12 -5h10v1h-10z M11 -4h12v1h-12z"/>
+<path fill="#FF8A1F" d="M10 -3h14v1h-14z M9 -2h16v1h-16z M8 -1h18v1h-18z M8 1h18v3h-18z M8 5h18v3h-18z"/>
+<path fill="#E06A00" d="M8 0h18v1h-18z M8 4h18v1h-18z M9 8h16v1h-16z M10 9h14v1h-14z M11 10h12v1h-12z M12 11h10v1h-10z M14 12h6v1h-6z"/>
+</svg>

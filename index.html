@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nerkins</title>
+<meta name="viewport" content="width=1280, viewport-fit=cover">
+<meta name="description" content="Nerkins is a small studio making simple, joyful mobile games for everyone.">
+<meta name="theme-color" content="#62CDF7">
+<link rel="canonical" href="https://nerkins.com/">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nerkins">
+<meta property="og:description" content="Nerkins is a small studio making simple, joyful mobile games for everyone.">
+<meta property="og:url" content="https://nerkins.com/">
+<meta property="og:image" content="https://nerkins.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Concept: one bubblegum-blue world. A huge pixel Saturn logo owns the first screen,
+   then flies to the top-left corner as the page scrolls, leaving the rest of the site below it. */
+:root {
+  --blue: #62CDF7;       /* Bubblegum Blue, primary */
+  --orange: #FF8A1F;     /* Orange, accent */
+  --cloud: #F6F3FF;      /* Cloud, light surface */
+  --midnight: #14214A;   /* Midnight, ink */
+  --sky: #BFEBFC;        /* Sky, soft tint */
+  --muted: #3F4C78;      /* secondary text on light surfaces */
+  --white: #FFFFFF;
+  --display: 'Pixelify Sans', 'Courier New', monospace;
+  --body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --bar-h: 96px;
+}
+html { color-scheme: light; scroll-padding-top: 100px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { margin: 0; background: var(--blue); color: var(--midnight); font-family: var(--body); min-width: 1280px; }
+a { color: inherit; }
+a:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { text-wrap: balance; }
+
+.wrap {
+  width: 1280px; box-sizing: border-box; margin: 0 auto;
+  padding-left: max(80px, env(safe-area-inset-left, 0px));
+  padding-right: max(80px, env(safe-area-inset-right, 0px));
+}
+
+/* ---- fixed top bar (fades in once the logo has arrived) ---- */
+.bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  height: calc(var(--bar-h) + env(safe-area-inset-top, 0px));
+  box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px);
+  padding-left: max(40px, env(safe-area-inset-left, 0px));
+  padding-right: max(40px, env(safe-area-inset-right, 0px));
+  background: var(--blue); border-bottom: 4px solid var(--midnight);
+  opacity: 0; pointer-events: none;
+}
+
+/* ---- logo: sits in the hero by default, becomes fixed + scroll-driven when JS runs ---- */
+.logo-slot { width: 720px; height: 297px; margin: 0 auto; }
+.logo { display: block; width: 720px; height: 297px; }
+.logo svg { display: block; width: 100%; height: 100%; }
+.anim .logo { position: fixed; left: 0; top: 0; z-index: 60; transform-origin: 0 0; will-change: transform; }
+
+/* ---- hero ---- */
+.hero .wrap { display: flex; flex-direction: column; align-items: center; padding-top: 140px; padding-bottom: 112px; }
+.tagline { margin-top: 44px; font-family: var(--display); font-weight: 700; font-size: 46px; line-height: 1.1; text-align: center; color: var(--midnight); }
+.menu { margin-top: 36px; background: var(--midnight); padding: 28px 32px 32px 28px; display: flex; gap: 16px; }
+.btn-primary {
+  background: #FF8A1F; color: #14214A; font-weight: 800; font-size: 17px; text-decoration: none;
+  padding: 12px 28px; min-height: 52px; box-sizing: border-box;
+  border: 3px solid #F6F3FF; box-shadow: 5px 5px 0 #62CDF7; display: flex; align-items: center;
+}
+.btn-secondary {
+  color: #F6F3FF; font-weight: 800; font-size: 17px; text-decoration: none;
+  padding: 12px 28px; min-height: 52px; box-sizing: border-box;
+  border: 3px solid #F6F3FF; display: flex; align-items: center;
+}
+.cue { margin-top: 44px; display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 13px; font-weight: 800; letter-spacing: 0.14em; color: var(--midnight); }
+
+/* ---- sections ---- */
+.h2 { font-family: var(--display); font-weight: 700; font-size: 52px; line-height: 1.05; }
+.games .wrap { display: flex; align-items: center; justify-content: space-between; gap: 64px; padding-top: 96px; padding-bottom: 96px; }
+.games .copy { width: 560px; display: flex; flex-direction: column; gap: 20px; }
+.games p { font-size: 20px; line-height: 1.55; }
+.card { background: var(--cloud); border: 4px solid var(--midnight); box-shadow: 8px 8px 0 var(--midnight); box-sizing: border-box; }
+.game-card { width: 440px; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+.pill { align-self: flex-start; background: var(--orange); color: var(--midnight); font-weight: 800; font-size: 13px; letter-spacing: 0.1em; padding: 6px 14px; }
+.game-name { font-family: var(--display); font-weight: 700; font-size: 40px; line-height: 1.1; }
+.game-card .meta { font-size: 17px; line-height: 1.5; color: var(--muted); }
+
+.values { background: var(--cloud); }
+.values .wrap { display: flex; flex-direction: column; gap: 48px; padding-top: 96px; padding-bottom: 96px; }
+.values .row { display: flex; gap: 32px; }
+.value { flex: 1; min-width: 0; background: var(--white); border: 4px solid var(--midnight); box-shadow: 8px 8px 0 var(--midnight); padding: 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; }
+.chip { width: 48px; height: 48px; border: 3px solid var(--midnight); box-sizing: border-box; }
+.value h3 { font-family: var(--display); font-weight: 700; font-size: 30px; }
+.value p { font-size: 17px; line-height: 1.5; }
+
+.about { background: var(--orange); }
+.about .wrap { display: flex; flex-direction: column; gap: 20px; padding-top: 96px; padding-bottom: 96px; }
+.about p { font-size: 21px; line-height: 1.55; max-width: 720px; }
+
+.contact { background: var(--cloud); }
+.contact .wrap { display: flex; flex-direction: column; gap: 16px; padding-top: 96px; padding-bottom: 96px; }
+.contact p { font-size: 20px; line-height: 1.55; max-width: 560px; }
+.signup { margin-top: 16px; width: 560px; display: flex; flex-direction: column; gap: 12px; }
+.signup-label { font-weight: 800; font-size: 15px; letter-spacing: 0.04em; }
+.signup-row { display: flex; gap: 16px; }
+.signup input {
+  flex: 1; min-width: 0; box-sizing: border-box; min-height: 56px; padding: 12px 16px;
+  font: 600 18px var(--body); color: var(--midnight); background: var(--white);
+  border: 4px solid var(--midnight); border-radius: 0;
+}
+.signup input::placeholder { color: var(--muted); opacity: 1; }
+.signup input:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+.signup-btn {
+  min-height: 56px; padding: 12px 28px; font: 800 17px var(--body); color: var(--midnight);
+  background: var(--orange); border: 4px solid var(--midnight); box-shadow: 5px 5px 0 var(--midnight);
+  border-radius: 0; cursor: pointer;
+}
+.signup-btn:active { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--midnight); }
+.signup-btn:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+.signup-msg { min-height: 24px; font-size: 16px; font-weight: 600; line-height: 1.5; }
+
+.foot { background: var(--midnight); color: var(--cloud); }
+.foot .wrap {
+  width: auto; margin: 0; display: flex; align-items: center; justify-content: space-between;
+  padding-top: 24px; padding-bottom: 24px;
+  padding-left: max(40px, env(safe-area-inset-left, 0px));
+  padding-right: max(40px, env(safe-area-inset-right, 0px));
+}
+.foot svg { display: block; width: 168px; height: 69px; margin-left: -3.3px; }
+.foot small { font-size: 15px; color: var(--sky); }
+.foot .wrap { padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px)); }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<defs>
+<g id="nk" shape-rendering="crispEdges">
+<path fill="#FFFFFF" d="M-7 8h6v1h-6z M-1 7h6v1h-6z M5 6h6v1h-6z M11 5h6v1h-6z M17 4h6v1h-6z M23 3h6v1h-6z M29 2h6v1h-6z M35 1h6v1h-6z"/>
+<path fill="#BFEBFC" d="M-7 9h6v1h-6z M-1 8h6v1h-6z M5 7h6v1h-6z M11 6h6v1h-6z M17 5h6v1h-6z M23 4h6v1h-6z M29 3h6v1h-6z M35 2h6v1h-6z"/>
+<path fill="#FFB35C" d="M14 -6h6v1h-6z M12 -5h10v1h-10z M11 -4h12v1h-12z"/>
+<path fill="#FF8A1F" d="M10 -3h14v1h-14z M9 -2h16v1h-16z M8 -1h18v1h-18z M8 1h18v3h-18z M8 5h18v3h-18z"/>
+<path fill="#E06A00" d="M8 0h18v1h-18z M8 4h18v1h-18z M9 8h16v1h-16z M10 9h14v1h-14z M11 10h12v1h-12z M12 11h10v1h-10z M14 12h6v1h-6z"/>
+<path fill="#F6F3FF" stroke="#14214A" stroke-width="0.5" stroke-linejoin="miter" paint-order="stroke" d="M0 0h1v7h-1z M4 0h1v7h-1z M1 1h1v1h-1z M2 2h1v1h-1z M3 3h1v1h-1z M8 2h3v1h-3z M7 3h1v3h-1z M11 3h1v1h-1z M7 4h5v1h-5z M8 6h3v1h-3z M13 2h1v5h-1z M14 3h1v1h-1z M15 2h2v1h-2z M18 0h1v7h-1z M21 2h1v1h-1z M20 3h1v1h-1z M19 4h1v1h-1z M20 5h1v1h-1z M21 6h1v1h-1z M23 0h1v1h-1z M23 2h1v5h-1z M25 2h4v1h-4z M25 3h1v4h-1z M28 3h1v4h-1z M31 2h3v1h-3z M30 3h2v1h-2z M31 4h2v1h-2z M32 5h2v1h-2z M30 6h3v1h-3z"/>
+</g>
+</defs>
+</svg>
+
+<div class="bar" id="bar"></div>
+
+<main>
+<section class="hero" id="top">
+<div class="wrap" id="hero-wrap">
+<div class="logo-slot" id="logo-slot">
+<a class="logo" id="logo" href="#top" aria-label="Nerkins, back to top">
+<svg viewBox="-8 -7 51 21" role="img" aria-label="Nerkins logo: the word Nerkins in pixel letters in front of a pixel Saturn"><use href="#nk"/></svg>
+</a>
+</div>
+<h1 class="tagline">Games you can't put down.</h1>
+<div class="menu">
+<a class="btn-primary" href="#games">See what we're making</a>
+<a class="btn-secondary" href="#contact">Say hello</a>
+</div>
+<div class="cue" id="cue" aria-hidden="true">
+<span>SCROLL</span>
+<svg width="24" height="12" viewBox="0 0 12 6" shape-rendering="crispEdges"><path fill="#14214A" d="M0 0h2v1h-2z M10 0h2v1h-2z M1 1h2v1h-2z M9 1h2v1h-2z M2 2h2v1h-2z M8 2h2v1h-2z M3 3h2v1h-2z M7 3h2v1h-2z M4 4h4v1h-4z M5 5h2v1h-2z"/></svg>
+</div>
+</div>
+</section>
+
+<section class="games" id="games">
+<div class="wrap">
+<div class="copy">
+<h2 class="h2">Our first game</h2>
+<p>A one-screen puzzle you'll understand in seconds and keep playing for just one more round. Easy to learn, hard to put down.</p>
+</div>
+<div class="card game-card">
+<div class="pill">IN DEVELOPMENT</div>
+<div class="game-name">In Progress</div>
+<div class="meta">Coming to iOS and Android.</div>
+</div>
+</div>
+</section>
+
+<section class="values">
+<div class="wrap">
+<h2 class="h2">What we care about</h2>
+<div class="row">
+<div class="value">
+<div class="chip" style="background: #62CDF7"></div>
+<h3>Friendly</h3>
+<p>Games anyone can pick up in seconds, at any age, with no manual needed.</p>
+</div>
+<div class="value">
+<div class="chip" style="background: #FF8A1F"></div>
+<h3>Playful</h3>
+<p>Every tap should feel good: a bit of sound, a bit of motion, a little surprise.</p>
+</div>
+<div class="value">
+<div class="chip" style="background: #14214A"></div>
+<h3>Fresh</h3>
+<p>We use new tools, AI included, to build faster and try bolder ideas.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="about" id="about">
+<div class="wrap">
+<h2 class="h2">A small studio with a big plan.</h2>
+<p>Nerkins starts with one person and one game. Over time we'll grow into a team and a family of games with a face you'll recognize anywhere.</p>
+</div>
+</section>
+
+<section class="contact" id="contact">
+<div class="wrap">
+<h2 class="h2">Say hello</h2>
+<p>Press, partnerships or just a kind word: we'd love to hear from you.</p>
+<form class="signup" id="signup" novalidate>
+<label class="signup-label" for="email">Your email</label>
+<div class="signup-row">
+<input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+<button class="signup-btn" type="submit">Send</button>
+</div>
+<p class="signup-msg" id="signup-msg" role="status" aria-live="polite"></p>
+</form>
+</div>
+</section>
+</main>
+
+<footer class="foot">
+<div class="wrap">
+<svg viewBox="-8 -7 51 21" role="img" aria-label="Nerkins"><use href="#nk"/></svg>
+<small>© 2026 Nerkins. All rights reserved.</small>
+</div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var logo = document.getElementById('logo');
+  var slot = document.getElementById('logo-slot');
+  var bar = document.getElementById('bar');
+  var cue = document.getElementById('cue');
+  var wrap = document.getElementById('hero-wrap');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var W0 = 720, W1 = 168, S1 = W1 / W0;
+  var sL = 0, sT = 0, eL = 0, eT = 0, D = 380;
+
+  function measure() {
+    var r = slot.getBoundingClientRect();
+    sL = r.left;
+    sT = r.top + window.scrollY;
+    eL = parseFloat(getComputedStyle(bar).paddingLeft || '40') - W1 / 51;
+    eT = parseFloat(getComputedStyle(bar).paddingTop || '0') + 12;
+    D = Math.min(window.innerHeight * 0.42, 380);
+    update();
+  }
+
+  function update() {
+    var y = Math.max(window.scrollY, 0);
+    var p = Math.min(y / D, 1);
+    var e;
+    if (reduce.matches) { e = p > 0.25 ? 1 : 0; }
+    else { e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; }
+    var s = 1 + (S1 - 1) * e;
+    var x = sL + (eL - sL) * e;
+    var t = sT + (eT - sT) * e;
+    logo.style.transform = 'translate3d(' + x + 'px,' + t + 'px,0) scale(' + s + ')';
+    logo.style.pointerEvents = e > 0.98 ? 'auto' : 'none';
+    bar.style.opacity = String(Math.min(Math.max((p - 0.6) / 0.4, 0), 1));
+    cue.style.opacity = String(Math.max(1 - p * 5, 0));
+  }
+
+  /* Email sign-up. Set ENDPOINT to the form service URL when the site goes live. */
+  var ENDPOINT = '';
+  var form = document.getElementById('signup');
+  var input = document.getElementById('email');
+  var msg = document.getElementById('signup-msg');
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var v = input.value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) {
+      msg.textContent = 'Please enter a valid email address.';
+      input.focus();
+      return;
+    }
+    if (!ENDPOINT) {
+      msg.textContent = 'Email sign-up is not connected yet. Please check back soon.';
+      return;
+    }
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email: v })
+    }).then(function (r) {
+      if (!r.ok) { throw new Error('bad response'); }
+      msg.textContent = 'Thanks! We will be in touch.';
+      form.reset();
+    }).catch(function () {
+      msg.textContent = 'Something went wrong. Please try again.';
+    });
+  });
+
+  root.classList.add('anim');
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(measure); }
+  measure();
+})();
+</script>
+</body>
+</html>
